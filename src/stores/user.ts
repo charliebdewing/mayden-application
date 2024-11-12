@@ -92,12 +92,17 @@ export const useAuthStore = defineStore('auth', () => {
             // Creates user account
             await createUserData(userState)
 
+            // Creates default list and adds ref to the users lists field
+            await createListData(userState)
+
             // Reload because otherwise it's a whole load of flow control
             location.reload()
           }
 
+          // Sets user data on the remote store
           await setUserData(userState)
 
+          // Sets user data on the local store
           setUserStore(userState)
         }
 

@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { routes } from 'vue-router/auto-routes'
 import { useAuthStore } from '@/stores/user'
+import { useListStore } from '@/stores/list'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,11 +19,16 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   await authStore.authWatcher()
-
   const user = authStore.user
 
+  const listsStore = useListStore()
+  await listsStore.unsubscribeFromList()
+
   if (user) {
-    //  Add get list here
+    // This can be updated in the future to allow for the user to have multiple lists
+    let listId = user.lists[0].id
+
+    await listsStore.listWatcher(listId)
   }
 
   next()

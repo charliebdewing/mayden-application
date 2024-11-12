@@ -36,6 +36,7 @@
 import { storeToRefs } from "pinia";
 import { useListStore } from "@/stores/list";
 import draggable from "vuedraggable/dist/vuedraggable.common";
+import { ShoppingList } from "@/types/index";
 
 const listStore = useListStore();
 const { list } = storeToRefs(listStore);
@@ -48,6 +49,14 @@ function addItem() {
 function deleteItem(index: number) {
   list.value.items.splice(index, 1);
 }
+
+watch(
+  list,
+  async (newList: ShoppingList) => {
+    await listStore.setListStore(newList);
+  },
+  { deep: true }
+);
 </script>
 
 <style lang="scss" scoped>
