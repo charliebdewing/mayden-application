@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineModel, defineEmits } from "vue";
+import { defineModel, defineEmits, defineProps } from "vue";
 
 const name = defineModel("name");
 const price = defineModel("price");
