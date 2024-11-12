@@ -61,10 +61,6 @@ const price = defineModel("price");
 const completed = defineModel("completed");
 
 const emit = defineEmits(["delete"]);
-
-// const { editable } = defineProps({ editable: Boolean })
-
-const editable = true;
 </script>
 
 <style lang="scss" scoped>

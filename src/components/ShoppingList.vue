@@ -22,6 +22,12 @@
         </draggable>
         <add-list-item class="ps-7" @click="addItem"></add-list-item>
       </v-list>
+
+      <TotalCost
+        class="me-10"
+        :items="list.items"
+        v-model:limit.number="list.limit"
+      ></TotalCost>
     </v-card>
   </div>
 </template>
