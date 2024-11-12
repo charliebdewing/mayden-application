@@ -2,16 +2,24 @@
   <div class="shopping-list flex-1-0">
     <v-card class="py-4">
       <v-list>
-        <list-item
-          v-for="(item, i) in list.items"
-          :editable="editable"
-          @delete="deleteItem(index)"
-          v-model:completed="item.completed"
-          v-model:name="item.name"
-          v-model:price.number="item.price"
+        <draggable
+          :component-data="{ tag: 'list-item' }"
+          v-model="list.items"
+          :animation="200"
+          ghost-class="ghost"
+          handle=".handle"
+          item-key="index"
         >
-          {{ item.name }}
-        </list-item>
+          <template #item="{ element, index }">
+            <list-item
+              @delete="deleteItem(index)"
+              v-model:completed="element.completed"
+              v-model:name="element.name"
+              v-model:price.number="element.price"
+            >
+            </list-item>
+          </template>
+        </draggable>
         <add-list-item class="ps-7" @click="addItem"></add-list-item>
       </v-list>
     </v-card>
@@ -21,6 +29,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useListsStore } from "@/stores/list";
+import draggable from "vuedraggable/dist/vuedraggable.common";
 
 const listsStore = useListsStore();
 const { list } = storeToRefs(listsStore);

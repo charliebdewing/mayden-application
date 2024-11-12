@@ -4,6 +4,9 @@
     :class="{ 'item-completed': completed }"
   >
     <v-row dense class="align-center overflow-x-auto flex-1-0">
+      <v-col cols="auto" class="d-flex align-center">
+        <v-icon class="handle" aria-label="Drag item">mdi-drag</v-icon>
+      </v-col>
       <v-col dense cols="auto" class="d-flex align-center">
         <v-checkbox-btn
           aria-label="Check off item"
