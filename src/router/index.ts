@@ -26,9 +26,16 @@ router.beforeEach(async (to, from, next) => {
 
   if (user) {
     // This can be updated in the future to allow for the user to have multiple lists
-    let listId = user.lists[0].id
+    let listId = to.query.list || user.lists[0].id
 
     await listsStore.listWatcher(listId)
+
+    if (!to.query.list) {
+      const query = { ...to.query, list: listId }
+
+      next({ name: to.name, params: to.params, query })
+      return
+    }
   }
 
   next()
