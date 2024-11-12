@@ -3,7 +3,7 @@ import { ShoppingList } from '@/types'
 import { Nullable } from '@/types/base'
 import { Unsubscribe } from 'firebase/firestore';
 import { setListData, subscribeToList } from "@/utils/api";
-
+import router from '@/router'
 
 export const useListStore = defineStore('list', () => {
   const listStore = ref<Nullable<ShoppingList>>(null)
@@ -39,6 +39,11 @@ export const useListStore = defineStore('list', () => {
         (data: ShoppingList) => {
           setListStore(data)
           res(!!data)
+        },
+        (error: Error) => {
+          alert(`${error.message}\nRedirecting to your list`)
+
+          router.push({ query: {} })
         }
       )
     })

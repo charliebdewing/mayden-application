@@ -79,8 +79,9 @@ export async function setListData(list: ShoppingList): Promise<void> {
   }
 }
 
-export function subscribeToList(listId: string, callback: Function) {
+export function subscribeToList(listId: string, callback: Function, errorCallback: Function): Unsubscribe {
   return onSnapshot(doc(collection(db, 'lists'), listId),
-    (doc) => callback(doc.data())
+    (doc) => callback(doc.data()),
+    (error) => errorCallback(error)
   );
 }
