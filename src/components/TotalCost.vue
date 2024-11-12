@@ -11,7 +11,7 @@
       <v-text-field
         v-if="editable || limit"
         density="compact"
-        :style="{ width: '150px', color: color }"
+        :style="{ width: calcWidth, color: color }"
         aria-label="Cost limit"
         class="limit"
         variant="underlined"
@@ -49,6 +49,11 @@ const total = computed<number>(() => {
     0
   );
   return parseFloat(total.toFixed(2));
+});
+
+const calcWidth = computed<string>(() => {
+  const limitTextWidth = String(limit.value || "").length * 20.3;
+  return `${limitTextWidth < 85 ? 85 : limitTextWidth}px`;
 });
 
 let color = computed<string>(() => {
