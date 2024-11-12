@@ -82,7 +82,8 @@ const { editable } = defineProps({ editable: Boolean });
     opacity: 0;
   }
 
-  &:hover .close-button {
+  &:hover .close-button,
+  &:focus-within .close-button {
     opacity: 1;
   }
 }
