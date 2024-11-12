@@ -27,7 +27,7 @@
           hide-details="auto"
           v-model="name"
           :readonly="!editable"
-          placeholder="Item name"
+          placeholder="Name"
         ></v-textarea>
       </v-col>
       <v-col v-if="editable || price" cols="auto" class="flex col-price">
