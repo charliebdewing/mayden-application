@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { ShoppingList } from '@/types'
 import { Nullable } from '@/types/base'
 
-export const useListsStore = defineStore('lists', () => {
   const listStore = ref<Nullable<ShoppingList>>({
     id: 'test',
     items: [
@@ -11,6 +10,7 @@ export const useListsStore = defineStore('lists', () => {
   })
 
   function setListStore(list: Nullable<ShoppingList>) {
+export const useListStore = defineStore('list', () => {
     // return early if it's a reset
     if (list === null) {
       listStore.value = null

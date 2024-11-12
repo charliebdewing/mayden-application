@@ -34,11 +34,11 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useListsStore } from "@/stores/list";
+import { useListStore } from "@/stores/list";
 import draggable from "vuedraggable/dist/vuedraggable.common";
 
-const listsStore = useListsStore();
-const { list } = storeToRefs(listsStore);
+const listStore = useListStore();
+const { list } = storeToRefs(listStore);
 
 function addItem() {
   const defaultItem = { name: "", completed: false };
