@@ -4,30 +4,33 @@
     :class="{ 'item-completed': completed }"
   >
     <v-row dense class="align-center overflow-x-auto flex-1-0">
-      <v-col cols="auto" class="d-flex align-center">
+      <v-col v-if="editable" cols="auto" class="d-flex align-center">
         <v-icon class="handle" aria-label="Drag item">mdi-drag</v-icon>
       </v-col>
       <v-col dense cols="auto" class="d-flex align-center">
         <v-checkbox-btn
+          :disabled="!editable"
           aria-label="Check off item"
-          class="mx-n2 mt-3"
+          class="mx-n2"
           v-model="completed"
         ></v-checkbox-btn>
       </v-col>
       <v-col cols="auto" class="flex-1-1 col-name">
         <v-textarea
-          class="name"
+          class="name dense"
           autofocus
           variant="underlined"
           :auto-grow="true"
           :rows="1"
           hide-details="auto"
           v-model="name"
+          :readonly="!editable"
           placeholder="Item name"
         ></v-textarea>
       </v-col>
-      <v-col cols="auto" class="flex col-price">
+      <v-col v-if="editable || price" cols="auto" class="flex col-price">
         <v-text-field
+          :readonly="!editable"
           title="Price"
           hide-spin-buttons
           aria-label="Price"
@@ -35,12 +38,13 @@
           variant="underlined"
           hide-details="auto"
           v-model.number="price"
+          placeholder=""
           type="number"
         >
           <template v-slot:prepend-inner>£</template>
         </v-text-field>
       </v-col>
-      <v-col cols="auto">
+      <v-col v-if="editable" cols="auto">
         <v-icon
           @click="$emit('delete')"
           class="close-button"
@@ -61,6 +65,8 @@ const price = defineModel("price");
 const completed = defineModel("completed");
 
 const emit = defineEmits(["delete"]);
+
+const { editable } = defineProps({ editable: Boolean });
 </script>
 
 <style lang="scss" scoped>

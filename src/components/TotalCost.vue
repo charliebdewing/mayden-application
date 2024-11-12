@@ -2,12 +2,14 @@
   <div class="cost-wrapper mb-2 d-flex flex-column">
     <div class="d-flex align-end">
       <v-spacer></v-spacer>
-      <span class="currency-symbol">£</span>
-      <span class="text-total" aria-label="Total cost">
+      <!-- If I had more time I would make the display of this cleaner with all the editable props -->
+      <span v-if="editable || total || limit" class="currency-symbol">£</span>
+      <span v-if="editable || total" class="text-total" aria-label="Total cost">
         {{ total }}
       </span>
-      <span class="slash-divider" aria-hidden>/</span>
+      <span v-if="editable || limit" class="slash-divider" aria-hidden>/</span>
       <v-text-field
+        v-if="editable || limit"
         density="compact"
         aria-label="Cost limit"
         class="limit"
@@ -33,8 +35,9 @@
 import { ListItem } from "@/types";
 import { defineModel, defineEmits, defineProps, useTemplateRef } from "vue";
 
-const { items = [] } = defineProps({
+const { items = [], editable } = defineProps({
   items: Array<ListItem>,
+  editable: Boolean,
 });
 
 const limit = defineModel<number>("limit");
