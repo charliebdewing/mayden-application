@@ -9,6 +9,7 @@
       </v-col>
       <v-col dense cols="auto" class="d-flex align-center">
         <v-checkbox-btn
+          color="indigo"
           :disabled="!editable"
           aria-label="Check off item"
           class="mx-n2"
@@ -17,6 +18,7 @@
       </v-col>
       <v-col cols="auto" class="flex-1-1 col-name">
         <v-textarea
+          color="indigo"
           class="name dense"
           autofocus
           variant="underlined"
@@ -30,6 +32,7 @@
       </v-col>
       <v-col v-if="editable || price" cols="auto" class="flex col-price">
         <v-text-field
+          color="indigo"
           :readonly="!editable"
           title="Price"
           hide-spin-buttons
