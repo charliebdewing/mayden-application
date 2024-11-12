@@ -1,6 +1,42 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M261.126 140.65L164.624 307.732L256.001 466L377.028 256.5L498.001 47H315.192L261.126 140.65Z" fill="#1697F6"/>
-<path d="M135.027 256.5L141.365 267.518L231.64 111.178L268.731 47H256H14L135.027 256.5Z" fill="#AEDDFF"/>
-<path d="M315.191 47C360.935 197.446 256 466 256 466L164.624 307.732L315.191 47Z" fill="#1867C0"/>
-<path d="M268.731 47C76.0026 47 141.366 267.518 141.366 267.518L268.731 47Z" fill="#7BC6FF"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" viewBox="0 0 420.8 421.05">
+    <defs>
+        <style>
+            .cls-1,
+            .cls-2 {
+                fill: #fff;
+            }
+
+            .cls-1,
+            .cls-2,
+            .cls-3 {
+                stroke: #0b7384;
+                stroke-miterlimit: 10;
+                stroke-width: 13.38px;
+            }
+
+            .cls-4 {
+                fill: #d64405;
+            }
+
+            .cls-2,
+            .cls-3 {
+                stroke-linecap: round;
+            }
+
+            .cls-3 {
+                fill: none;
+            }
+        </style>
+    </defs>
+    <g id="Layer_1-2">
+        <line class="cls-3" x1="80.39" y1="334.25" x2="338.68" y2="75.97"></line>
+        <line class="cls-3" x1="24.97" y1="23.42" x2="322.51" y2="320.96"></line>
+        <circle class="cls-1" cx="209.55" cy="207.11" r="78.18"></circle>
+        <circle class="cls-1" cx="34.05" cy="34.05" r="27.36"></circle>
+        <circle class="cls-1" cx="352.61" cy="62.26" r="27.36"></circle>
+        <circle class="cls-2" cx="80.39" cy="334.25" r="34.4"></circle>
+        <circle class="cls-2" cx="359.07" cy="359.32" r="55.04"></circle>
+        <circle class="cls-4" cx="210.45" cy="205.41" r="44.25"></circle>
+    </g>
 </svg>
