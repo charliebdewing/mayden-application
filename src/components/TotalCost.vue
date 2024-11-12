@@ -11,6 +11,7 @@
       <v-text-field
         v-if="editable || limit"
         density="compact"
+        :style="{ width: '150px', color: color }"
         aria-label="Cost limit"
         class="limit"
         variant="underlined"
@@ -48,6 +49,17 @@ const total = computed<number>(() => {
     0
   );
   return parseFloat(total.toFixed(2));
+});
+
+let color = computed<string>(() => {
+  if (!total.value || !limit.value) return "grey";
+
+  const percentage = (total.value / limit.value) * 100;
+  if (percentage < 25) return "indigo";
+  if (percentage < 50) return "teal";
+  if (percentage < 75) return "green";
+  if (percentage < 100) return "orange";
+  return "#d64405";
 });
 
 const overLimit = computed(() => {
