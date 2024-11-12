@@ -8,10 +8,24 @@
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { routes } from 'vue-router/auto-routes'
+import { useAuthStore } from '@/stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: setupLayouts(routes),
+})
+
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore()
+  await authStore.authWatcher()
+
+  const user = authStore.user
+
+  if (user) {
+    //  Add get list here
+  }
+
+  next()
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804

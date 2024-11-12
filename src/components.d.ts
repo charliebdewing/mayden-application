@@ -11,9 +11,11 @@ declare module 'vue' {
     AddListItem: typeof import('./components/AddListItem.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     ListItem: typeof import('./components/ListItem.vue')['default']
+    Login: typeof import('./components/Login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ShoppingList: typeof import('./components/ShoppingList.vue')['default']
+    Toolbar: typeof import('./components/Toolbar.vue')['default']
     TotalCost: typeof import('./components/TotalCost.vue')['default']
   }
 }
