@@ -87,6 +87,14 @@ const { editable } = defineProps({ editable: Boolean });
   }
 }
 
+.handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
 .item-completed {
   & .name {
     text-decoration: line-through;
