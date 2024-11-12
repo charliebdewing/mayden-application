@@ -54,6 +54,15 @@
               <span class="text-h5">{{ user.email }}</span>
               <v-spacer></v-spacer>
               <v-btn
+                title="Email Link"
+                color="primary"
+                icon
+                size="small"
+                :href="user.link"
+              >
+                <v-icon class="" icon="mdi-email-arrow-right-outline"></v-icon>
+              </v-btn>
+              <v-btn
                 color="error"
                 class="ms-3"
                 title="Remove Access"
@@ -92,16 +101,65 @@ const { list } = storeToRefs(listsStore);
 
 interface UserOption {
   email: string;
+  link: string;
 }
 
 const listOptions = computed(() => {
   return list.value.access.read
     .filter((user: string) => user !== userEmail)
     .reduce<UserOption[]>((acc: UserOption[], user: string) => {
-      acc.push({ email: user });
+      acc.push({ email: user, link: linkGenerator(user) });
       return acc;
     }, []);
 });
+
+function linkGenerator(email: string): string {
+  const subject = `Here's my shopping list`;
+
+  const link = `${window.location.origin}?list=${list.value.id}`;
+
+  let incomplete = "";
+  let completed = "";
+
+  let total = 0;
+
+  // I would have prefered to do this with a reduce but good lord does typescript make it verbose
+  for (let i = 0; i < list.value.items.length; i++) {
+    const item = list.value.items[i];
+    let parsed = `${item.name}${item.price ? `: £${item.price}` : ""}`;
+    if (item.completed) completed += `\n- ${parsed}`;
+    else incomplete += `\n- ${parsed}`;
+
+    if (item.price) {
+      total += item.price;
+      parsed += `: £${item.price}`;
+    }
+  }
+
+  let listItemsToText = "";
+
+  if (incomplete) {
+    incomplete = `Need to buy: ${incomplete}`;
+    listItemsToText += incomplete;
+  }
+
+  if (completed) {
+    completed = `Already bought: ${completed}`;
+    listItemsToText += incomplete ? "\n\n" : "" + completed;
+  }
+
+  const body = `Hey bud!\n\nHere's a link to my shopping list: ${link}${
+    listItemsToText ? `\n\n${listItemsToText}` : ""
+  }\n\n${total ? `Total: £${total}` : ""}${
+    list.value.limit ? `\nLimit: £${list.value.limit}` : ""
+  }\n\nLots of love xoxoxo`;
+
+  const mailto = `mailto:${email}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  return mailto;
+}
 
 function removeUser(email: string) {
   removeUsersListAccess(list.value.id || "", email);
