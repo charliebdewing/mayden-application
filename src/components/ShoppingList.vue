@@ -28,6 +28,8 @@
         :items="list.items"
         v-model:limit.number="list.limit"
       ></TotalCost>
+
+      <Share></Share>
     </v-card>
   </div>
 </template>

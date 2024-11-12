@@ -1,6 +1,6 @@
 import { IUser, ShoppingList } from '@/types'
 import { Unsubscribe } from 'firebase/auth'
-import { collection, doc, getDoc, getFirestore, setDoc, getCountFromServer, query, documentId, where, onSnapshot } from 'firebase/firestore'
+import { collection, doc, getDoc, updateDoc, arrayRemove, arrayUnion, getFirestore, setDoc, getCountFromServer, query, documentId, where, onSnapshot } from 'firebase/firestore'
 
 let db = getFirestore()
 
@@ -85,3 +85,28 @@ export function subscribeToList(listId: string, callback: Function, errorCallbac
     (error) => errorCallback(error)
   );
 }
+
+export async function addUsersListAccess(listId: string, userEmail: string): Promise<void> {
+  const docRef = doc(collection(db, 'lists'), listId)
+  try {
+    await updateDoc(docRef, {
+      'access.read': arrayUnion(userEmail),
+    });
+    console.log(`Successfully added ${userEmail} to the 'read' array.`);
+  } catch (error) {
+    console.error('Error adding user to read array: ', error);
+  }
+}
+
+export async function removeUsersListAccess(listId: string, userEmail: string): Promise<void> {
+  const docRef = doc(collection(db, 'lists'), listId)
+  try {
+    await updateDoc(docRef, {
+      'access.read': arrayRemove(userEmail)
+    });
+    console.log(`Successfully removed ${userEmail} from the 'read' array.`);
+  } catch (error) {
+    console.error('Error removing user from read array: ', error);
+  }
+}
+

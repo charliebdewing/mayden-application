@@ -14,6 +14,7 @@ declare module 'vue' {
     Login: typeof import('./components/Login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Share: typeof import('./components/Share.vue')['default']
     ShoppingList: typeof import('./components/ShoppingList.vue')['default']
     Toolbar: typeof import('./components/Toolbar.vue')['default']
     TotalCost: typeof import('./components/TotalCost.vue')['default']
