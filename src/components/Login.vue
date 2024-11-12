@@ -67,6 +67,7 @@
 
 <script lang="ts" setup>
 import { useAuthStore } from "@/stores/user";
+import { emailRules } from "@/utils/validation";
 
 const authStore = useAuthStore();
 
@@ -75,12 +76,6 @@ let valid = ref(false);
 let loading = ref(false);
 
 let email = ref("");
-
-const emailRules = [
-  (v: string | null) =>
-    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v || "") ||
-    "E-mail must be valid",
-];
 
 let password = ref("");
 

@@ -26,6 +26,7 @@
               <v-text-field
                 :loading="loading"
                 @keypress.enter="addUser(newUser)"
+                :rules="emailRules"
                 v-model="newUser"
                 type="email"
                 hint="Type in a friend's email to give them access to the list"
@@ -75,6 +76,7 @@ import { useAuthStore } from "@/stores/user";
 import { useListStore } from "@/stores/list";
 import { storeToRefs } from "pinia";
 import { addUsersListAccess, removeUsersListAccess } from "@/utils/api";
+import { emailRules } from "@/utils/validation";
 
 const dialog = ref(false);
 let loading = ref(false);
