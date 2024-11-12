@@ -13,6 +13,8 @@ import { getUserData, setUserData, createUserData, createListData } from "@/util
 
 import router from '@/router'
 
+import { useListStore } from '@/stores/list';
+
 export const useAuthStore = defineStore('auth', () => {
   const userStore = ref<Nullable<IUser>>(null)
 
@@ -57,6 +59,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function logout() {
+    const listStore = useListStore()
+    listStore.listSub()
+
     await getAuth().signOut()
     setUserStore(null)
 
