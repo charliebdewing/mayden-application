@@ -12,7 +12,11 @@ export interface ShoppingList {
   createdBy: string,
   created: Date,
   limit?: Number | null,
-  items: ListItem[]
+  items: ListItem[],
+  access: {
+    read: string[],
+    write: string[]
+  }
 }
 
 // Auth

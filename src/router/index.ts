@@ -10,6 +10,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import { routes } from 'vue-router/auto-routes'
 import { useAuthStore } from '@/stores/user'
 import { useListStore } from '@/stores/list'
+import { ShoppingList } from '@/types'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +29,19 @@ router.beforeEach(async (to, from, next) => {
     // This can be updated in the future to allow for the user to have multiple lists
     let listId = to.query.list || user.lists[0].id
 
-    await listsStore.listWatcher(listId)
+    try {
+      await listsStore.listWatcher(listId)
+      const listData: ShoppingList = await listsStore.list
+
+      if (!listData?.id) {
+        throw Error('No Id found')
+      }
+    } catch (error) {
+      console.error(error)
+      alert('You do not have access to this list.')
+      next({ name: to.name, params: to.params, query: {} })
+      return
+    }
 
     if (!to.query.list) {
       const query = { ...to.query, list: listId }

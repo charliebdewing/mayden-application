@@ -1,5 +1,5 @@
 import { IUser, ShoppingList } from '@/types'
-
+import { Unsubscribe } from 'firebase/auth'
 import { collection, doc, getDoc, getFirestore, setDoc, getCountFromServer, query, documentId, where, onSnapshot } from 'firebase/firestore'
 
 let db = getFirestore()
@@ -47,6 +47,10 @@ export async function createListData(user: IUser): Promise<void> {
       name: '',
       completed: false
     }],
+    access: {
+      read: [user.email || user.uid],
+      write: [user.email || user.uid]
+    }
   }
 
   // Create an empty ref to get the id
