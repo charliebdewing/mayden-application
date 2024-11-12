@@ -1,5 +1,20 @@
 # Charlie Ewing's Technical test submission for Mayden
 
+View it here: [https://c-e-mayden-app.web.app/](https://c-e-mayden-app.web.app/)
+
+## Notes
+
+If I had more time I would have spent it:
+- Add in vitest for testing
+- Improving the text input validation
+- Improve Accessiblity
+- Generally improving the design, a bit of colour wouldn't go amiss
+- Improving the login flow (no refresh on login, no refresh on error)
+- Moving the read shopping items to FB functions and returning only the items when previewing another users list
+- Guest login using the email link
+- Removing Vuetify- I love it but it was overkill for this and ended up slowing me down more than helping
+- Login with other providers
+
 ## 💿 Install
 
 Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
